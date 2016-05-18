@@ -15,16 +15,21 @@ AppBody = React.createClass({
       modal: false
     }
   },
-  ionModal(tab) {
+  ionModal(tab, content) {
     this.setState({
       modal: (
-        <IonModal>
+        <IonModal modalContent={content}>
           <div className="h1 title">{tab}</div>
           <button onClick={ () => this.setState({modal:false}) } className="button button-icon active">
             <i className="icon ion-ios-close-empty"></i>
           </button>
         </IonModal>
       )
+    })
+  },
+  setModalState(status) {
+    this.setState({
+      modal: status
     })
   },
   render() {
@@ -39,7 +44,7 @@ AppBody = React.createClass({
         <div className="view">
           <div className="scroll-content ionic-scroll">
             <div className="content overflow-scroll has-header">
-              <ReactRouter.RouteHandler />
+              <ReactRouter.RouteHandler setModalState={this.setModalState} ionModal={this.ionModal}/>
             </div>
           </div>
         </div>
